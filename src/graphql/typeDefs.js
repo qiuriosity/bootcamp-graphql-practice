@@ -6,9 +6,10 @@ module.exports = gql`
 
   type Query {
     welcome: String!
-    authors: [Author]
+    allAuthors: [Author!]!
+    allBooks: [Book!]!
     book(id: ID!): Book!
-    author(id: ID!): Author
+    author(id: ID!): Author!
     booksWritten(authorId: ID!): [Book!]
     booksPublished(publisherId: ID!): [Book!]
     authorOf(bookId: ID!): Author!

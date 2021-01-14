@@ -1,9 +1,9 @@
 const Author = require('../../models/Author')
 
-const authors = async () => {
+const allAuthors = async () => {
   try {
-    const a = await Author.query()
-    return a
+    const authors = await Author.query()
+    return authors
   } catch (err) {
     throw new Error('authors failed')
   }
@@ -21,7 +21,7 @@ const author = async (obj, { id: authorId }, context) => {
 
 const resolver = {
   Query: {
-    authors,
+    allAuthors,
     author,
   },
 }
