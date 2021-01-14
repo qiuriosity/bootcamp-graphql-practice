@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express')
 
 module.exports = gql`
   scalar Date
-  scalar DateTime
+  # scalar DateTime
 
   type Query {
     welcome: String!
@@ -17,46 +17,44 @@ module.exports = gql`
     addressOf(personId: ID!): Address!
   }
 
-  # type Mutation {
-  #   addAuthor(input: AddAuthorInput!): Author!
-  #   addBook(input: AddBookInput!): Book!
-  #   updateAuthorAddress(authorId: ID!, input: updateAddressInput!): Address!
-  # }
+  type Mutation {
+    addAuthor(input: AuthorInput!): Author!
+    addBook(input: BookInput!): Book!
+    updateAuthorAddress(authorId: ID!, input: AddressInput!): Address!
+  }
 
-  # input AddAuthorInput {
-  #   id: ID!
-  #   firstName: String!
-  #   lastName: String!
-  #   age: Int
-  #   email: String
-  #   numBooksPublished: Int
-  #   address: Address
-  #   createdAt: DateTime
-  #   updatedAt: DateTime
-  # }
+  input AuthorInput {
+    firstName: String!
+    lastName: String!
+    age: Int
+    email: String
+    numBooksPublished: Int
+    address: AddressInput!
+  }
 
-  # input AddBookInput {
-  #   id: ID!
-  #   title: String!
-  #   language: String!
-  #   numPages: Int
-  #   datePublished: Date
-  #   bestseller: Boolean
-  #   author: Author!
-  #   publisher: Publisher!
-  #   createdAt: DateTime
-  #   updatedAt: DateTime
-  # }
+  input PublisherInput {
+    company: String!
+    phoneNumber: String
+    numBooksPublished: Int
+    address: AddressInput!
+  }
 
-  # input updateAddressInput {
-  #   id: ID!
-  #   street: String!
-  #   city: String!
-  #   state: String!
-  #   zip: String!
-  #   createdAt: DateTime
-  #   updatedAt: DateTime
-  # }
+  input BookInput {
+    title: String!
+    language: String!
+    numPages: Int
+    datePublished: Date
+    bestseller: Boolean
+    author: AuthorInput!
+    publisher: PublisherInput!
+  }
+
+  input AddressInput {
+    street: String!
+    city: String!
+    state: String!
+    zip: String!
+  }
 
   type Book {
     id: ID!
@@ -67,8 +65,6 @@ module.exports = gql`
     bestseller: Boolean
     author: Author!
     publisher: Publisher!
-    createdAt: DateTime
-    updatedAt: DateTime
   }
 
   type Author {
@@ -79,8 +75,6 @@ module.exports = gql`
     email: String
     numBooksPublished: Int
     address: Address
-    createdAt: DateTime
-    updatedAt: DateTime
   }
 
   type Publisher {
@@ -89,8 +83,6 @@ module.exports = gql`
     phoneNumber: String
     numBooksPublished: Int
     address: Address
-    createdAt: DateTime
-    updatedAt: DateTime
   }
 
   type Address {
@@ -99,7 +91,5 @@ module.exports = gql`
     city: String!
     state: String!
     zip: String!
-    createdAt: DateTime
-    updatedAt: DateTime
   }
 `
